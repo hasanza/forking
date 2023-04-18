@@ -2,7 +2,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "forge-std/Test.sol";
-import "../src/SecureMe.sol";
+import "../src/MyContract.sol";
 
 contract ApproveTest is Test {
     address public constant USDTAddr =
@@ -10,13 +10,13 @@ contract ApproveTest is Test {
     uint256 mainnetFork;
     ERC20 USDT = ERC20(USDTAddr);
     address user = 0x0162Cd2BA40E23378Bf0FD41f919E1be075f025F;
-    SecureMe instance;
+    MyContract instance;
 
     function setUp() public {
         // Create the fork
         mainnetFork = vm.createFork(vm.envString("MAINNET_RPC_URL"));
         // Instantiate SecureMe
-        instance = new SecureMe(100 ether, USDT);
+        instance = new MyContract(100 ether, USDT);
         // Boostrap test contract w/ ETH
         deal(address(this), 100 ether);
         deal(address(user), 100 ether);
@@ -28,6 +28,6 @@ contract ApproveTest is Test {
         vm.prank(actualUser);
         // Allowance to instance
         // This reverts. But calls to `view` functions succeed
-        IERC20(USDTAddr).transfer(address(instance), 50);
+        IERC20(USDTAddr).approve(address(instance), 50);
     }
 }

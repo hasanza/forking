@@ -5,7 +5,8 @@ import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import "forge-std/Test.sol";
 
-contract SecureMe is ERC20, Ownable {
+contract MyContract is ERC20, Ownable {
+    // Not relevant what this contract does
 
     ERC20 public USDT;
     constructor(uint256 initialSupply, ERC20 _USDT) ERC20("SecureMe", "SMTK") {
